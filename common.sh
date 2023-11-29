@@ -63,10 +63,6 @@ cd /app
 unzip /tmp/${component}.zip &>>${LOG}
 status_check
 
-print_head "Download dependencies"
-cd /app
-npm install &>>${LOG}
-status_check
 }
 
 NODEJS () {
@@ -80,5 +76,19 @@ NODEJS () {
 
   print_head "Install nodejs"
   dnf install nodejs -y &>>${LOG}
+  status_check
+}
+
+MYSQL () {
+  print_head "install mysql CLient"
+  dnf install mysql -y &>>${LOG}
+  status_check
+
+  print_head "load schema"
+  mysql -h 172.31.45.115 -uroot -pRoboShop@1 < /app/schema/shipping.sql
+  status_check
+
+  print_head "restart shipping service"
+  systemctl restart shipping
   status_check
 }
