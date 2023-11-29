@@ -45,7 +45,7 @@ MONGODB () {
 APP_REQ () {
 
 print_head "Useradd"
-id roboshop
+id roboshop &>>${LOG}
 if [ $? -ne 0 ]
 then
 useradd roboshop
