@@ -37,7 +37,7 @@ MONGODB () {
   status_check
 
   print_head "load schema"
-  mongo --host 172.31.42.253 </app/schema/${component}.js
+  mongo --host 172.31.42.253 </app/schema/${component}.js &>>${LOG}
   status_check
 
 }
