@@ -26,6 +26,7 @@ status_check
 print_head "Download and unzip  an application"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>{LOG}
 cd /app
+rm -rf /app/*
 unzip /tmp/catalogue.zip &>>{LOG}
 status_check
 
