@@ -1,13 +1,13 @@
 source common.sh
 
 dnf module disable nodejs -y &>>{LOG}
-statuscheck
+status_check
 
 dnf module enable nodejs:18 -y &>>{LOG}
-statuscheck
+status_check
 
 dnf install nodejs -y &>>{LOG}
-statuscheck
+status_check
 
 id roboshop
 if [ $? -ne 0 ]
@@ -16,7 +16,7 @@ useradd roboshop
 fi
 
 mkdir -p /app
-statuscheck
+status_check
 
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>{LOG}
 cd /app
