@@ -1,16 +1,31 @@
 source common.sh
 
-dnf install nginx -y
+print_head "install ni=ginx"
+dnf install nginx -y &>>${LOG}
+status_check
+
 systemctl enable nginx
 
 systemctl start nginx
 
-rm -rf /usr/share/nginx/html/*
+print_head "remove old content"
+rm -rf /usr/share/nginx/html/* &>>${LOG}
+status_check
 
-curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
+
+print_head "copy nginx files to location"
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip &>>${LOG}
+status_check
+
 cd /usr/share/nginx/html/
-unzip /tmp/frontend.zip
 
-cp ${script_location}/files/roboshop.conf /etc/nginx/default.d/roboshop.conf
+print_head "unzip nginx files"
+unzip /tmp/frontend.zip &>>${LOG}
+status_check
+
+
+cp ${script_location}/files/roboshop.conf /etc/nginx/default.d/roboshop.conf &>>${LOG}
+status_check
+
 
 systemctl restart nginx
