@@ -30,10 +30,10 @@ SYSTEMD () {
 }
 
 MONGODB () {
-  cp ${script_location}/files/mongo.repo /etc/yum.repos.d/mongo.repo
+  cp ${script_location}/files/mongo.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
 
   print_head "Mongodb client server"
-  dnf install mongodb-org-shell -y
+  dnf install mongodb-org-shell -y &>>${LOG}
   status_check
 
   print_head "load schema"
