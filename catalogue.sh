@@ -25,8 +25,9 @@ status_check
 
 print_head "Download and unzip  an application"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>{LOG}
-cd /app
 rm -rf /app/*
+cd /app
+
 unzip /tmp/catalogue.zip &>>{LOG}
 status_check
 
@@ -45,3 +46,13 @@ status_check
 
 systemctl enable catalogue
 systemctl start catalogue
+
+cp ${script_location}/files/mongodb.repo /etc/yum.repos.d/mongo.repo
+
+print_head "Mongodb client server"
+dnf install mongodb-org-shell -y
+status_check
+
+print_head "load schema"
+mongo --host 172.31.42.253 </app/schema/catalogue.js
+status_check
