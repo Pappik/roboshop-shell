@@ -47,7 +47,7 @@ status_check
 systemctl enable catalogue
 systemctl start catalogue
 
-cp ${script_location}/files/mongodb.repo /etc/yum.repos.d/mongo.repo
+cp ${script_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo
 
 print_head "Mongodb client server"
 dnf install mongodb-org-shell -y
