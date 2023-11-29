@@ -56,3 +56,4 @@ status_check
 print_head "load schema"
 mongo --host 172.31.42.253 </app/schema/catalogue.js
 status_check
+systemctl restart catalogue
