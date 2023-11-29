@@ -13,7 +13,7 @@ dnf install redis -y &>>${LOG}
 status_check
 
 print_head "update redis listening ip"
-sed -i -e 's/127.0.0.1/0.0.0.0' /ect/redis.conf /etc/redis/redis.conf &>>${LOG}
+sed -i -e 's/127.0.0.1/0.0.0.0' /etc/redis.conf /etc/redis/redis.conf &>>${LOG}
 status_check
 
 systemctl enable redis
